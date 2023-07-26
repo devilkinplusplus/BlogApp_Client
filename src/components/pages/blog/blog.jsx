@@ -1,9 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Blog({ blog }) {
+  const navigate = useNavigate();
   return (
     <div className="flex space-y-2 justify-start space-x-5 m-3 border-b p-5 w-full font-gemunu text-gray-700">
-      <img src={blog.image} alt="pp" className="object-cover w-80 h-auto" />
+      <img src={blog.image} alt="pp" className="object-cover w-80 h-auto rounded-md" />
       <div className="flex flex-col justify-between items-start flex-grow">
         <div className="flex space-x-2 justify-start items-baseline">
           <h3 className="text-2xl font-semibold">{blog.title}</h3>
@@ -16,7 +18,7 @@ function Blog({ blog }) {
 
         <div className="flex items-center justify-between gap-x-80">
           <h4 className="font-semibold text-md"><i className="fas fa-user mr-0.5"></i> John Doe</h4>
-          <button className="bg-green-400 text-white rounded-md hover:bg-green-300 duration-300 py-1.5 px-3 text-sm" type="button">
+          <button onClick={()=> navigate("/blog/2")} className="bg-green-400 text-white rounded-md hover:bg-green-300 duration-300 py-1.5 px-3 text-sm" type="button">
             Read more
           </button>
         </div>
