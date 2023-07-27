@@ -1,5 +1,6 @@
 function isTokenValid(token) {
-    if(!token){
+  debugger;
+    if(token === undefined || token === null || token === "undefined"){
         return false;
     }
   // Decode the token to extract the expiration time
