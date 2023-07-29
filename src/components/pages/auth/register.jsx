@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { baseUrl } from "../../../base/baseUrl";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { createUser } from "../../../services/axiosServices";
+import ToastService from "../../../services/tostify";
 
 function Register() {
   const navigate = useNavigate();  
@@ -14,11 +14,15 @@ function Register() {
   } = useForm();
 
   const onSubmit = (data) => {
-    const url = `${baseUrl}/user`;
-    axios
-      .post(url, data)
+    createUser(data)
       .then((res) => {
-        navigate("/login")
+        if(res.status === 200){
+          navigate("/login")
+        }else{
+          for (const error of res.data) {
+            ToastService.error(error)
+          }
+        }
        })
       .catch((err) => console.log(err));
   };

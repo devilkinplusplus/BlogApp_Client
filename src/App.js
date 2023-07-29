@@ -1,5 +1,5 @@
 import './App.css';
-import {Route,Link,NavLink, Routes} from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom'
 import Header from './components/layout/header';
 import Footer from './components/layout/footer';
 import Home from './components/pages/home';
@@ -14,6 +14,7 @@ import BlogDetail from './components/pages/blog/blogDetail';
 import BlogHomeDetail from './components/pages/blogHomeDetail';
 import PrivateRoute from './components/helpers/privateRoute';
 import { useEffect, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const [token, setToken] = useState(() => localStorage.getItem('accessToken') || '');
@@ -41,6 +42,7 @@ function App() {
             </Route>
             {/* <Route path='*' element={<Contact/>} /> */}
           </Routes>
+            <ToastContainer />
         </main>
       <Footer />
     </div>

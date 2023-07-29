@@ -2,13 +2,13 @@ import React,{useEffect,useState} from "react";
 import axios from "axios";
 import { baseUrl } from "../../../base/baseUrl";
 import { useParams } from 'react-router-dom';
+import { getBlogById } from "../../../services/axiosServices";
 
 function BlogDetail() {
   const [blog,setBlog] = useState();
   const { id } = useParams();
   useEffect(()=>{
-    const url = `${baseUrl}/blogs/${id}`
-    axios.get(url).then(res=>{
+    getBlogById(id).then(res=>{
       setBlog(res.data);
     }).catch(err=>console.log(err))
   },[])

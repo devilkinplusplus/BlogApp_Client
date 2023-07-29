@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MiniBlog from "./miniblog";
 import { useParams } from "react-router-dom";
-import { baseUrl } from "../../base/baseUrl";
-import axios from "axios";
+import { getRecommendeds } from '../../services/axiosServices'
 
 function Recommendeds( { fetch } ) {
   const { id } = useParams();
@@ -16,8 +15,7 @@ function Recommendeds( { fetch } ) {
   },[])
 
   const fetchData = () => {
-    const url = `${baseUrl}/blogs/recommendeds/${id}`
-    axios.get(url)
+    getRecommendeds(id)
           .then((res)=>{
             setBlogs(res.data)
           }).catch(err=>{

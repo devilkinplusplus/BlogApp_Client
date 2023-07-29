@@ -2,7 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { baseUrl } from "../../../base/baseUrl";
+import 'alertifyjs/build/css/alertify.min.css';
+import { deleteBlog, getMyBlogs } from "../../../services/axiosServices";
+import { showSuccess , confirmAlert } from "../../../services/alertifyService";
+import ToastService from "../../../services/tostify";
 
 function MyBlogs() {
   const navigate = useNavigate();
@@ -11,9 +14,7 @@ function MyBlogs() {
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    const url = `${baseUrl}/user/blogs`;
-    axios
-      .get(url)
+    getMyBlogs()
       .then((res) => {
         console.log(res.data);
         setBlogs(res.data);
@@ -22,18 +23,15 @@ function MyBlogs() {
   }, []);
 
   const handleDelete = async (id) => {
-    const token = localStorage.getItem("accessToken");
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
-    const url = `${baseUrl}/blogs/${id}`;
-    axios
-      .delete(url)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    confirmAlert("Confirm request","Are you sure to delete ?",()=>{
+      deleteBlog(id)
+          .then((res) => {
+            ToastService.success("Deleted permanently ✅")
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+    },()=>{})
   };
 
   return (
@@ -55,7 +53,7 @@ function MyBlogs() {
         </tr>
       </thead>
       <tbody>
-        {blogs.map((item, index) => {
+        {blogs && blogs.map((item, index) => {
           return (
             <tr key={index}>
               <td

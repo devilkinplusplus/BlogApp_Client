@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { catagories } from "../../../base/availableCatagories";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { baseUrl } from "../../../base/baseUrl";
+import { createBlog } from "../../../services/axiosServices";
+import ToastService from "../../../services/tostify";
+import axios from "../../../services/axiosServices";
 
 function BlogCreate() {
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -21,7 +22,6 @@ function BlogCreate() {
 
   const onSubmit = async (data) => {
     try {
-      const url = `${baseUrl}/blog`;
       const token = localStorage.getItem("accessToken");
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
@@ -31,18 +31,13 @@ function BlogCreate() {
       formData.append("category", data.category);
       formData.append("photoUrl", data.photoUrl[0]);
 
-      const response = await axios.post(url, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      if (response.status === 204) {
+      const response = await createBlog(formData);
+      if (response.status) {
         navigate("/profile/blogs");
-        //TODO: Alertify
+        ToastService.success("Successfully created");
       }
     } catch (error) {
-      console.error(error);
+        ToastService.error("Something went wrong");
     }
   };
 

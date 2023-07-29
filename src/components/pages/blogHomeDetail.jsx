@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Recommendeds from './recommendeds'
 import { baseUrl } from '../../base/baseUrl'
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import { getBlogById } from '../../services/axiosServices';
 
 function BlogHomeDetail() {
 
@@ -15,8 +15,7 @@ function BlogHomeDetail() {
   },[])
 
   const fetchBlog = () =>{
-    const url = `${baseUrl}/blogs/${id}`
-    axios.get(url)
+    getBlogById(id)
           .then(res=>{
             setBlog(res.data)
           }).catch(err=>{
