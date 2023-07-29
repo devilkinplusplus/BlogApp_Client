@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import 'alertifyjs/build/css/alertify.min.css';
 import { deleteBlog, getMyBlogs } from "../../../services/axiosServices";
-import { showSuccess , confirmAlert } from "../../../services/alertifyService";
+import { confirmAlert } from "../../../services/alertifyService";
 import ToastService from "../../../services/tostify";
 
 function MyBlogs() {
@@ -23,7 +23,8 @@ function MyBlogs() {
   }, []);
 
   const handleDelete = async (id) => {
-    confirmAlert("Confirm request","Are you sure to delete ?",()=>{
+   
+    confirmAlert("Confirm request","Are you sure to delete ?",() => {
       deleteBlog(id)
           .then((res) => {
             ToastService.success("Deleted permanently ✅")

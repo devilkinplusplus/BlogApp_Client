@@ -1,5 +1,5 @@
 const catagories = [
-    'Sport','Tech','Religion','Politics','Other',"Writing"
+    'Sport','Tech','Religion','Politics',"Writing","Game",'Other'
 ];
 
 

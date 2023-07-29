@@ -27,7 +27,7 @@ function Recommendeds( { fetch } ) {
     <div className="p-4 bg-gray-200 font-gemunu">
       <h3 className="text-xl font-semibold text-gray-700 uppercase">Recommended blogs</h3>
       <div className="flex justify-start items-center h-44">
-        {blogs ? blogs.map((item, index) => {
+        {blogs ? blogs.slice(0,5).map((item, index) => {
           return <MiniBlog key={index} blog={item} />;
         }):
         (<>

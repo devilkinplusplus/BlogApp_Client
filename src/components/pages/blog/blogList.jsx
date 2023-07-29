@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Blog from "./blog";
-import "../../../styles/pages/_blogList.css";
 import ReactPaginate from "react-paginate";
 import NoItems from "../noItems";
 import { getBlogs } from "../../../services/axiosServices";
-
 
 function BlogList() {
   const [blogs, setBlogs] = useState([]);
@@ -39,12 +37,24 @@ function BlogList() {
     <>
       <div className="flex flex-wrap flex-1 p-4 justify-start bg-gray-100 pt-16">
         <div className="flex justify-start items-center mx-9 text-start space-x-5 text-lg text-cyan-900 font-gemunu uppercase border-b-2">
-          <span className="active-header">For you</span>
-          <span>Software</span>
-          <span>Sport</span>
-          <span>Islam</span>
-          <span>Food</span>
-          <span>Music</span>
+          <span className="border-b-2 border-transparent hover:text-cyan-600 hover:border-cyan-600 focus:text-cyan-600 focus:border-cyan-600 pb-3 cursor-pointer">
+            For you
+          </span>
+          <span className="border-b-2 border-transparent hover:text-cyan-600 hover:border-cyan-600 focus:text-cyan-600 focus:border-cyan-600 pb-3 cursor-pointer">
+            Tech
+          </span>
+          <span className="border-b-2 border-transparent hover:text-cyan-600 hover:border-cyan-600 focus:text-cyan-600 focus:border-cyan-600 pb-3 cursor-pointer">
+            Sport
+          </span>
+          <span className="border-b-2 border-transparent hover:text-cyan-600 hover:border-cyan-600 focus:text-cyan-600 focus:border-cyan-600 pb-3 cursor-pointer">
+            Islam
+          </span>
+          <span className="border-b-2 border-transparent hover:text-cyan-600 hover:border-cyan-600 focus:text-cyan-600 focus:border-cyan-600 pb-3 cursor-pointer">
+            Writing
+          </span>
+          <span className="border-b-2 border-transparent hover:text-cyan-600 hover:border-cyan-600 focus:text-cyan-600 focus:border-cyan-600 pb-3 cursor-pointer">
+            Game
+          </span>
         </div>
 
         {blogs.length > 0 ? (

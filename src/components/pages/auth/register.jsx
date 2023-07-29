@@ -18,13 +18,14 @@ function Register() {
       .then((res) => {
         if(res.status === 200){
           navigate("/login")
-        }else{
-          for (const error of res.data) {
-            ToastService.error(error)
-          }
+          ToastService.success("Congrats, you have account now 🥳")
         }
        })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        for (const error of err.response.data) {
+          ToastService.error(error)
+        }
+      });
   };
 
   return (

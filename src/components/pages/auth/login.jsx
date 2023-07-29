@@ -18,13 +18,11 @@ function Login() {
       if (res.status === 200) {
         localStorage.setItem("accessToken", res.data.accessToken);
         navigate("/");
-      }else{
-        for (const error of res.data) {
-          ToastService.error(error)
-        }
       }
     }).catch(err=>{
-        console.log(err);
+      for (const error of err.response.data) {
+        ToastService.error(error)
+      }
     });
   };
 

@@ -13,8 +13,21 @@ export const showSuccess = (message) => {
     alertify.notify(message, 'warning', 5); 
   };
 
-  export const confirmAlert = (title,message,success,error) => {
-    alertify.confirm(title,message,success(),error())
+  export const confirmAlert = (title,message,onConfirm,onCancel) => {
+    alertify.confirm(
+      title,
+      message,
+      () => {
+        if (typeof onConfirm === 'function') {
+          onConfirm();
+        }
+      },
+      () => {
+        if (typeof onCancel === 'function') {
+          onCancel();
+        }
+      }
+    );
   }
   
   export default alertify;

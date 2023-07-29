@@ -3,7 +3,6 @@ import {Route, Routes} from 'react-router-dom'
 import Header from './components/layout/header';
 import Footer from './components/layout/footer';
 import Home from './components/pages/home';
-import Contact from './components/pages/contact';
 import Profile from './components/pages/profile/profile';
 import Register from './components/pages/auth/register';
 import Login from './components/pages/auth/login';
@@ -15,6 +14,7 @@ import BlogHomeDetail from './components/pages/blogHomeDetail';
 import PrivateRoute from './components/helpers/privateRoute';
 import { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
+import NotFoundPage from './components/pages/notFoundPage';
 
 function App() {
   const [token, setToken] = useState(() => localStorage.getItem('accessToken') || '');
@@ -29,7 +29,6 @@ function App() {
         <main className="flex-grow">
           <Routes>
             <Route path='/' element={<Home />}/>
-            <Route path='/contact' element={<Contact />} />
             <Route path='/register' element={<Register />} />
             <Route path='/login' element={<Login />} />
             <Route path='/blog/:id' element={<BlogHomeDetail />} />
@@ -40,9 +39,9 @@ function App() {
               <Route path='blogs' element={<MyBlogs />} />
               <Route path=':id' element={<BlogDetail />} />
             </Route>
-            {/* <Route path='*' element={<Contact/>} /> */}
+            <Route path='*' element={<NotFoundPage/>} />
           </Routes>
-            <ToastContainer />
+          <ToastContainer />
         </main>
       <Footer />
     </div>
